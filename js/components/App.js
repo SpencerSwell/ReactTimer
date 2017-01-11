@@ -12,20 +12,27 @@ export default class App extends React.Component {
 		this.state = {
 			minutes:25,
 			seconds:0,
+			stopped:false
 		}
 	this.startTimer = this.startTimer.bind(this);
-    this.updateTimer = this.updateTimer.bind(this);
     this.Timer = this.Timer.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
 	}
 	 
 	startTimer() {
-
-		setInterval(this.Timer,1000);
+		if(this.state.stopped===false) {
+			console.log("TIMER STARTED")
+		var countdown = setInterval(this.Timer,1000);
+		}
+		console.log(this.state.stopped);
 		
 	}
 
 	 Timer() { 
 		
+	 	if (this.state.stopped===true) {
+		clearInterval(countdown);
+		};
 
 		if(this.state.seconds>0){
 			this.SubtractSecond()
@@ -49,15 +56,14 @@ export default class App extends React.Component {
 
 	};
 
-	 updateTimer() {
-
-
-	}
+	 resetTimer() {
+	 	this.setState({stopped:true,minutes:this.state.minutes=25,seconds:this.state.seconds=0})
+	};
 		render() {
 				return (
 					<div>
 					<Display minutes={this.state.minutes} seconds={this.state.seconds}/>
-					<ButtonList onClick={this.startTimer}/>
+					<ButtonList start={this.startTimer} reset={this.resetTimer}/>
 					</div>
 					)
 		}

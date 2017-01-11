@@ -6,9 +6,9 @@ export default function ButtonList (props) {
 return (
 
 <div>
-<button onClick={props.onClick}>Start</button> 
+<button onClick={props.start}>Start</button> 
 <button>Stop</button>
-<button>Reset</button>  
+<button onClick={props.reset}>Reset</button>  
 </div>	
 
 	)
